@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  # Para ver el servicio ir a http://localhost:5000/draw
+  drawio:
+    build:
+      context: drawio
+      dockerfile: Dockerfile
+    #ports:
+      #- 5000:8080 # Puerto a exportar 8080(interno) -> 5000 (externo)
+  drawio-codegen:
+    build:
+      context: drawio-codegen-microservice
+      dockerfile: Dockerfile
+    volumes:
+      - ./drawio-codegen-microservice:/usr/src/app
+    #ports:
+      #- 5001:8080 # Puerto a exportar 8080(interno) -> 5001 (externo)
+  drawio-nginx-gateway:
+    restart: always
+    build:
+      context: drawio-nginx-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:  
+      - ./drawio-nginx-gateway/dev.conf:/etc/nginx/conf.d/default.conf

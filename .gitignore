@@ -1,3 +1,3 @@
-drawio/
-drawio-codegen-microservice/
-drawio-nginx-gateway/
+!.gitignore
+!docker-compose.yaml
+*
